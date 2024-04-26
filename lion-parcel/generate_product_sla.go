@@ -19,6 +19,16 @@ var (
 
 func main() {
 	fmt.Println(generateEstimateSlaByProductType("2-4 Hari", "ONEPACK", time.Now()))
+
+	apiKeyPlain := GenerateApiKey(32)
+	encryptionKey := "cee2e0f11be53a9dc1c400f45b9b113d"
+
+	fmt.Println("apiKeyPlain", apiKeyPlain)
+	secret, _ := Encrypt(encryptionKey, apiKeyPlain)
+	fmt.Println("secret", secret)
+
+	decryptedApiKey, _ := Decrypt(encryptionKey, secret)
+	fmt.Println("decryptedApiKey", decryptedApiKey)
 }
 
 func generateEstimateSlaByProductType(estimateSLA, productType string, now time.Time) string {
